@@ -1,0 +1,9 @@
+@notifications_HostAddress = https://localhost:7233
+
+### Get all currently active notifications.
+GET {{notifications_HostAddress}}/
+Accept: application/json
+
+### Get all current and upcoming notifications.
+GET {{notifications_HostAddress}}/upcoming
+Accept: application/json
