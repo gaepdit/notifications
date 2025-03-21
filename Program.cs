@@ -1,24 +1,26 @@
 using Microsoft.Extensions.Options;
-using notifications;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOptions<ApiData>().BindConfiguration(nameof(ApiData));
 var app = builder.Build();
 
-// Endpoints
-app.MapGet("/", (IOptionsSnapshot<ApiData> data) =>
-    GetCurrentNotifications(data.Value.Notifications));
-app.MapGet("/upcoming", (IOptionsSnapshot<ApiData> data) =>
-    GetUpcomingNotifications(data.Value.Notifications));
+// API Endpoints
+app.MapGet("/current", (IOptionsSnapshot<ApiData> data) =>
+    data.Value.Notifications
+        .Where(notification => notification.DisplayStart < DateTime.Now && DateTime.Now < notification.DisplayEnd)
+        .OrderBy(notification => notification.DisplayStart).ToArray());
 
 await app.RunAsync();
-return;
 
-// API functions
-Notification[] GetCurrentNotifications(List<Notification> list) => list
-    .Where(n => n.DisplayStart < DateTime.Now && n.DisplayEnd > DateTime.Now)
-    .OrderBy(n => n.DisplayStart).ToArray();
+// API classes
+internal record Notification
+{
+    public required string Message { get; init; }
+    public DateTime DisplayStart { get; init; }
+    public DateTime DisplayEnd { get; init; }
+}
 
-Notification[] GetUpcomingNotifications(List<Notification> list) => list
-    .Where(n => n.DisplayEnd > DateTime.Now)
-    .OrderBy(n => n.DisplayStart).ToArray();
+internal record ApiData
+{
+    public List<Notification> Notifications { get; init; } = [];
+}
