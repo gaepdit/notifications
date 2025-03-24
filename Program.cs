@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using Notifications;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOptions<ApiData>().BindConfiguration(nameof(ApiData));
@@ -11,16 +12,3 @@ app.MapGet("/current", (IOptionsSnapshot<ApiData> data) =>
         .OrderBy(notification => notification.DisplayStart).ToArray());
 
 await app.RunAsync();
-
-// API classes
-internal record Notification
-{
-    public required string Message { get; init; }
-    public DateTime DisplayStart { get; init; }
-    public DateTime DisplayEnd { get; init; }
-}
-
-internal record ApiData
-{
-    public List<Notification> Notifications { get; init; } = [];
-}
