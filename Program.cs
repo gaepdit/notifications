@@ -1,9 +1,13 @@
 using Microsoft.Extensions.Options;
+using Mindscape.Raygun4Net.AspNetCore;
 using Notifications;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddRaygun(builder.Configuration);
 builder.Services.AddOptions<ApiData>().BindConfiguration(nameof(ApiData));
+
 var app = builder.Build();
+app.UseRaygun();
 
 // API Endpoints
 app.MapGet("/current", (IOptionsSnapshot<ApiData> data) =>
