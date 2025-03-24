@@ -4,9 +4,11 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>Notifications</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Mindscape.Raygun4Net.AspNetCore" Version="11.2.2" />
         <PackageReference Include="SonarAnalyzer.CSharp" Version="10.7.0.110445">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

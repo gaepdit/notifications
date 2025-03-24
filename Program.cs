@@ -1,8 +1,13 @@
 using Microsoft.Extensions.Options;
+using Mindscape.Raygun4Net.AspNetCore;
+using Notifications;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddRaygun(builder.Configuration);
 builder.Services.AddOptions<ApiData>().BindConfiguration(nameof(ApiData));
+
 var app = builder.Build();
+app.UseRaygun();
 
 // API Endpoints
 app.MapGet("/current", (IOptionsSnapshot<ApiData> data) =>
@@ -11,16 +16,3 @@ app.MapGet("/current", (IOptionsSnapshot<ApiData> data) =>
         .OrderBy(notification => notification.DisplayStart).ToArray());
 
 await app.RunAsync();
-
-// API classes
-internal record Notification
-{
-    public required string Message { get; init; }
-    public DateTime DisplayStart { get; init; }
-    public DateTime DisplayEnd { get; init; }
-}
-
-internal record ApiData
-{
-    public List<Notification> Notifications { get; init; } = [];
-}
