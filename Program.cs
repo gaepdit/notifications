@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Options;
 using Mindscape.Raygun4Net.AspNetCore;
 using Notifications;
@@ -10,6 +11,7 @@ var app = builder.Build();
 app.UseRaygun();
 
 // API Endpoints
+app.MapGet("/health", () => Results.Ok());
 app.MapGet("/current", (IOptionsSnapshot<ApiData> data) =>
     data.Value.Notifications
         .Where(notification => notification.DisplayStart < DateTime.Now && DateTime.Now < notification.DisplayEnd)
