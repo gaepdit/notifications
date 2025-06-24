@@ -541,6 +541,9 @@ FodyWeavers.xsd
 # Environment settings files
 appsettings.*.json
 
+## Build artifacts
+.artifacts/
+
 # SonarLint Rider plugin
 # .idea/**/sonarlint-state.xml
 
