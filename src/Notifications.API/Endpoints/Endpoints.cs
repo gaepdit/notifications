@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using Notifications.Database;
 using Notifications.Settings;
 
@@ -8,11 +7,14 @@ internal static class Endpoints
 {
     public static void MapEndpoints(this IEndpointRouteBuilder app)
     {
+        // Public endpoints
         app.MapGet("/health", () => Results.Ok("OK"));
+        app.MapGet("/current", Repository.GetCurrentNotificationsAsync);
+        app.MapGet("/future", Repository.GetFutureNotificationsAsync);
 
-        app.MapGet("/current", (AppDbContext dbContext) => dbContext.Notifications
-                .Where(n => n.Active && n.DisplayStart < DateTime.Now && DateTime.Now < n.DisplayEnd)
-                .OrderBy(n => n.DisplayStart).ToListAsync())
-            .RequireAuthorization(AppSettings.ApiKeys);
+        // Admin endpoints; API key required
+        app.MapGet("/all", Repository.GetAllNotifications).RequireAuthorization(AppSettings.ApiKeys);
+        app.MapPost("/add", Repository.AddNotification).RequireAuthorization(AppSettings.ApiKeys);
+        app.MapPost("/deactivate", Repository.DeactivateNotification).RequireAuthorization(AppSettings.ApiKeys);
     }
 }
