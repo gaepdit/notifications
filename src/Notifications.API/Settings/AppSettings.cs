@@ -1,17 +1,9 @@
-﻿using Notifications.Models;
+﻿namespace Notifications.Settings;
 
-namespace Notifications.Settings;
-
-internal class AppSettings
+internal static class AppSettings
 {
-    public List<string> ApiKeys { get; } = [];
-    public List<Notification> Notifications { get; } = [];
-}
+    public const string ApiKeys = nameof(ApiKeys);
 
-internal static class AppSettingsExtensions
-{
-    public static void BindAppSettings(this IServiceCollection services)
-    {
-        services.AddOptions<AppSettings>().BindConfiguration(configSectionPath: nameof(AppSettings));
-    }
+    public static void BindAppSettings(this IServiceCollection services) =>
+        services.AddOptions<List<string>>(ApiKeys).BindConfiguration(configSectionPath: ApiKeys);
 }

@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Options;
-using Notifications.AuthHandlers;
+using Microsoft.EntityFrameworkCore;
+using Notifications.Database;
 using Notifications.Settings;
 
 namespace Notifications.Endpoints;
@@ -10,9 +10,9 @@ internal static class Endpoints
     {
         app.MapGet("/health", () => Results.Ok("OK"));
 
-        app.MapGet("/current", (IOptionsSnapshot<AppSettings> data) => data.Value.Notifications
+        app.MapGet("/current", (AppDbContext dbContext) => dbContext.Notifications
                 .Where(n => n.Active && n.DisplayStart < DateTime.Now && DateTime.Now < n.DisplayEnd)
-                .OrderBy(n => n.DisplayStart).ToArray())
-            .RequireAuthorization(SchemeType.ApiKey);
+                .OrderBy(n => n.DisplayStart).ToListAsync())
+            .RequireAuthorization(AppSettings.ApiKeys);
     }
 }

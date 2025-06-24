@@ -6,31 +6,26 @@ using System.Text.Encodings.Web;
 
 namespace Notifications.AuthHandlers;
 
-internal static class SchemeType
-{
-    public const string ApiKey = "ApiKey";
-}
-
 internal static class AuthenticationHandlerExtensions
 {
     public static void AddApiKeyAuthentication(this IServiceCollection services)
     {
-        services.AddAuthentication(SchemeType.ApiKey)
-            .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>(SchemeType.ApiKey, null);
-        services.AddAuthorizationBuilder().AddPolicy(SchemeType.ApiKey, policy =>
-            policy.RequireAuthenticatedUser().AuthenticationSchemes.Add(SchemeType.ApiKey));
+        services.AddAuthentication(AppSettings.ApiKeys)
+            .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>(AppSettings.ApiKeys, null);
+        services.AddAuthorizationBuilder().AddPolicy(AppSettings.ApiKeys, policy =>
+            policy.RequireAuthenticatedUser().AuthenticationSchemes.Add(AppSettings.ApiKeys));
     }
 }
 
 internal class ApiKeyAuthenticationHandler(
     IOptionsMonitor<AuthenticationSchemeOptions> options,
-    IOptionsSnapshot<AppSettings> appSettings,
+    IOptionsSnapshot<List<string>> appSettings,
     ILoggerFactory logger,
     UrlEncoder encoder)
     : AuthenticationHandler<AuthenticationSchemeOptions>(options, logger, encoder)
 {
     public const string ApiKeyHeaderName = "X-API-Key";
-    private List<string> ApiKeys { get; } = appSettings.Value.ApiKeys;
+    private List<string> ApiKeys { get; } = appSettings.Get(AppSettings.ApiKeys);
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
