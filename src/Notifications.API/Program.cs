@@ -13,7 +13,7 @@ app.UseRaygun();
 app.MapGet("/health", () => Results.Ok("OK"));
 app.MapGet("/current", (IOptionsSnapshot<ApiData> data) =>
     data.Value.Notifications
-        .Where(notification => notification.DisplayStart < DateTime.Now && DateTime.Now < notification.DisplayEnd)
-        .OrderBy(notification => notification.DisplayStart).ToArray());
+        .Where(n => n.DisplayStart < DateTime.Now && DateTime.Now < n.DisplayEnd && n.Active)
+        .OrderBy(n => n.DisplayStart).ToArray());
 
 await app.RunAsync();
