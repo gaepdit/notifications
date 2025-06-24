@@ -13,7 +13,7 @@ Accept: application/json
 GET {{HostAddress}}/current
 Accept: application/json
 
-### List all currently active notifications.
+### List all future active notifications.
 GET {{HostAddress}}/future
 Accept: application/json
 
@@ -21,6 +21,11 @@ Accept: application/json
 GET {{HostAddress}}/all
 Accept: application/json
 X-API-Key: {{ApiKey}}
+
+### List all notifications using alternate API key.
+GET {{HostAddress}}/all
+Accept: application/json
+X-API-Key: {{ApiKey2}}
 
 ### Create a new notification.
 POST {{HostAddress}}/add
@@ -53,31 +58,4 @@ X-API-Key: {{ApiKey}}
 
 {
   "Id": "00000000-0000-0000-0000-000000000001"
-}
-
-### Attempt to deactivate a missing notification.
-POST {{HostAddress}}/deactivate
-Content-Type: application/json
-X-API-Key: {{ApiKey}}
-
-{
-  "Id": "00000000-9999-0000-0000-000000000000"
-}
-
-### Attempt to deactivate an inactive notification.
-POST {{HostAddress}}/deactivate
-Content-Type: application/json
-X-API-Key: {{ApiKey}}
-
-{
-  "Id": "00000000-0000-0000-0000-000000000002"
-}
-
-### Attempt to deactivate an expired notification.
-POST {{HostAddress}}/deactivate
-Content-Type: application/json
-X-API-Key: {{ApiKey}}
-
-{
-  "Id": "00000000-0000-0000-0000-000000000003"
 }

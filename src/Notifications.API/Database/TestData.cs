@@ -11,28 +11,33 @@ internal static class TestData
         await context.SaveChangesAsync(token);
     }
 
-    public static List<Notification> NotificationSeedItems =>
+    private static Guid CurrentNotificationId { get; } = new("00000000-0000-0000-0000-000000000001");
+    public static Guid InactiveNotificationId { get; } = new("00000000-0000-0000-0000-000000000002");
+    public static Guid ExpiredNotificationId { get; } = new("00000000-0000-0000-0000-000000000003");
+    private static Guid FutureNotificationId { get; } = new("00000000-0000-0000-0000-000000000004");
+
+    public static List<Notification> NotificationSeedItems { get; } =
     [
-        new(new Guid("00000000-0000-0000-0000-000000000001"))
+        new(CurrentNotificationId)
         {
             Message = "Current notification",
             DisplayStart = DateTime.UtcNow.AddDays(-1),
             DisplayEnd = DateTime.UtcNow.AddDays(1).AddHours(1),
         },
-        new(new Guid("00000000-0000-0000-0000-000000000002"))
+        new(InactiveNotificationId)
         {
             Message = "Inactive notification",
             DisplayStart = DateTime.UtcNow.AddDays(-1),
             DisplayEnd = DateTime.UtcNow.AddDays(1).AddHours(1),
             Active = false,
         },
-        new(new Guid("00000000-0000-0000-0000-000000000003"))
+        new(ExpiredNotificationId)
         {
             Message = "Expired notification",
             DisplayStart = DateTime.UtcNow.AddDays(-2),
             DisplayEnd = DateTime.UtcNow.AddDays(-1).AddHours(1),
         },
-        new(new Guid("00000000-0000-0000-0000-000000000004"))
+        new(FutureNotificationId)
         {
             Message = "Future notification",
             DisplayStart = DateTime.UtcNow.AddDays(1),

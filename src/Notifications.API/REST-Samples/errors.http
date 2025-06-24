@@ -1,11 +1,39 @@
 @HostAddress = https://localhost:7233
+@ApiKey = client-api-key-1
 @InvalidApiKey = invalid-api-key
 
 ### (HTTP 401 Unauthorized) missing API key
-GET {{HostAddress}}/current
+GET {{HostAddress}}/all
 Accept: application/json
 
 ### (HTTP 401 Unauthorized) incorrect API key
-GET {{HostAddress}}/current
+GET {{HostAddress}}/all
 Accept: application/json
 X-API-Key: {{InvalidApiKey}}
+
+### (HTTP 404 Not Found) Attempt to deactivate a missing notification.
+POST {{HostAddress}}/deactivate
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+  "Id": "00000000-9999-0000-0000-000000000000"
+}
+
+### (HTTP 400 Bad Request) Attempt to deactivate an inactive notification.
+POST {{HostAddress}}/deactivate
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+  "Id": "00000000-0000-0000-0000-000000000002"
+}
+
+### (HTTP 400 Bad Request) Attempt to deactivate an expired notification.
+POST {{HostAddress}}/deactivate
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+  "Id": "00000000-0000-0000-0000-000000000003"
+}
