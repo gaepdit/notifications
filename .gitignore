@@ -552,3 +552,6 @@ appsettings.*.json
 
 # Sqlite database and associated files
 *.db*
+
+# Generated EF migration bundles
+efbundle.exe
