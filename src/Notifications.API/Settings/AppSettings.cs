@@ -4,6 +4,7 @@ namespace Notifications.Settings;
 
 internal class AppSettings
 {
+    public List<string> ApiKeys { get; } = [];
     public List<Notification> Notifications { get; } = [];
 }
 

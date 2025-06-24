@@ -1,0 +1,11 @@
+@HostAddress = https://localhost:7233
+@InvalidApiKey = invalid-api-key
+
+### (HTTP 401 Unauthorized) missing API key
+GET {{HostAddress}}/current
+Accept: application/json
+
+### (HTTP 401 Unauthorized) incorrect API key
+GET {{HostAddress}}/current
+Accept: application/json
+X-API-Key: {{InvalidApiKey}}

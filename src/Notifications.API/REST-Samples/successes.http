@@ -1,0 +1,17 @@
+@HostAddress = https://localhost:7233
+@ApiKey = client-api-key-1
+@ApiKey2 = client-api-key-2
+
+### Check health.
+GET {{HostAddress}}/health
+Accept: application/json
+
+### Get all currently active notifications.
+GET {{HostAddress}}/current
+Accept: application/json
+X-API-Key: {{ApiKey}}
+
+### Get all currently active notifications with an alternate API key.
+GET {{HostAddress}}/current
+Accept: application/json
+X-API-Key: {{ApiKey2}}
