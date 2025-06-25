@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Notifications.Database;
-using NUnit.Framework.Internal;
 
 namespace Notifications.API.Tests;
 
 [TestFixture]
-public class RepositoryReadTests
+public class GetNotificationsTests
 {
     private AppDbContext _dbContext;
 
@@ -29,7 +28,7 @@ public class RepositoryReadTests
     }
 
     [Test]
-    public async Task GetCurrentNotifications_ReturnsCurrentNotifications()
+    public async Task GetCurrentNotifications()
     {
         // Arrange
         var expected = TestData.NotificationSeedItems.Where(e =>
@@ -43,7 +42,7 @@ public class RepositoryReadTests
     }
 
     [Test]
-    public async Task GetFutureNotifications_ReturnsFutureNotifications()
+    public async Task GetFutureNotifications()
     {
         // Arrange
         var expected = TestData.NotificationSeedItems.Where(e =>
@@ -57,7 +56,7 @@ public class RepositoryReadTests
     }
 
     [Test]
-    public async Task GetAllNotifications_ReturnsAllNotifications()
+    public async Task GetAllNotifications()
     {
         // Act
         var results = await Repository.GetAllNotifications(_dbContext);

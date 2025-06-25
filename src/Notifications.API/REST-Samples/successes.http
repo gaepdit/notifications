@@ -34,8 +34,8 @@ X-API-Key: {{ApiKey}}
 
 {
   "Message": "New notification",
-  "DisplayStart": "2025-05-01T09:00",
-  "DisplayEnd": "2025-08-01T21:00"
+  "DisplayStart": "2025-06-25T08:00",
+  "DisplayEnd": "2050-08-01T21:00"
 }
 
 > {%
@@ -51,7 +51,7 @@ X-API-Key: {{ApiKey}}
   "Id": "{{newId}}"
 }
 
-### Deactivate a notification.
+### Deactivate a current notification.
 POST {{HostAddress}}/deactivate
 Content-Type: application/json
 X-API-Key: {{ApiKey}}

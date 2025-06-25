@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Notifications.Database;
 using Notifications.Models;
@@ -7,7 +6,7 @@ using Notifications.Models;
 namespace Notifications.API.Tests;
 
 [TestFixture]
-public class RepositoryWriteTests
+public class DeactivateNotificationTests
 {
     private AppDbContext _dbContext;
 
@@ -31,45 +30,17 @@ public class RepositoryWriteTests
     }
 
     [Test]
-    public async Task AddNotification_ReturnsSuccess()
+    public async Task HappyPath_ReturnsSuccess()
     {
         // Arrange
-        var resource = new CreateNotification
-        {
-            Message = "Test message",
-            DisplayStart = DateTime.Now.AddDays(-1),
-            DisplayEnd = DateTime.Now.AddDays(1),
-        };
-
-        // Act
-        var result = await Repository.AddNotification(resource, _dbContext);
-
-        // Assert
-        using var scope = new AssertionScope();
-
-        result.Should().BeOfType<Ok<Notification>>();
-
-        var notification = ((Ok<Notification>)result).Value;
-        notification.Should().BeOfType<Notification>();
-        notification.Should().NotBeNull();
-        notification.Message.Should().Be(resource.Message);
-
-        var current = await Repository.GetCurrentNotificationsAsync(_dbContext);
-        current.Should().Contain(notification);
-    }
-
-    [Test]
-    public async Task DeactivateNotification_ReturnsSuccess()
-    {
-        // Arrange
-        var create = new CreateNotification
+        var create = new CreateNotificationDto
         {
             Message = "Test message",
             DisplayStart = DateTime.Now.AddDays(-1),
             DisplayEnd = DateTime.Now.AddDays(1),
         };
         var newNotification = (await Repository.AddNotification(create, _dbContext) as Ok<Notification>)!.Value;
-        var request = new NotificationRequest { Id = newNotification!.Id };
+        var request = new DeactivateNotificationDto { Id = newNotification!.Id };
 
         // Act
         var result = await Repository.DeactivateNotification(request, _dbContext);
@@ -86,10 +57,10 @@ public class RepositoryWriteTests
     }
 
     [Test]
-    public async Task DeactivateNotification_MissingId_ReturnsNotFound()
+    public async Task MissingId_ReturnsNotFound()
     {
         // Arrange
-        var request = new NotificationRequest { Id = Guid.NewGuid() };
+        var request = new DeactivateNotificationDto { Id = Guid.NewGuid() };
 
         // Act
         var result = await Repository.DeactivateNotification(request, _dbContext);
@@ -99,28 +70,28 @@ public class RepositoryWriteTests
     }
 
     [Test]
-    public async Task DeactivateNotification_InactiveNotification_ReturnsBadRequest()
+    public async Task InactiveNotification_ReturnsBadRequest()
     {
         // Arrange
-        var request = new NotificationRequest { Id = TestData.InactiveNotificationId };
+        var request = new DeactivateNotificationDto { Id = TestData.InactiveNotificationId };
 
         // Act
         var result = await Repository.DeactivateNotification(request, _dbContext);
 
         // Assert
-        result.Should().BeOfType<BadRequest<string>>();
+        result.Should().BeOfType<BadRequest<List<string>>>();
     }
 
     [Test]
-    public async Task DeactivateNotification_ExpiredNotification_ReturnsBadRequest()
+    public async Task ExpiredNotification_ReturnsBadRequest()
     {
         // Arrange
-        var request = new NotificationRequest { Id = TestData.ExpiredNotificationId };
+        var request = new DeactivateNotificationDto { Id = TestData.ExpiredNotificationId };
 
         // Act
         var result = await Repository.DeactivateNotification(request, _dbContext);
 
         // Assert
-        result.Should().BeOfType<BadRequest<string>>();
+        result.Should().BeOfType<BadRequest<List<string>>>();
     }
 }

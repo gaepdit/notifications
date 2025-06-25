@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Notifications.Models;
 
@@ -23,7 +22,7 @@ public record Notification
 
     public void Deactivate() => Active = false;
 
-    public static Notification Create(CreateNotification resource) =>
+    public static Notification Create(CreateNotificationDto resource) =>
         new(id: Guid.NewGuid())
         {
             Message = resource.Message,

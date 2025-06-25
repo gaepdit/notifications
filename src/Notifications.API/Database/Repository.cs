@@ -23,20 +23,28 @@ internal static class Repository
 
     // Write
 
-    public static async Task<IResult> AddNotification(CreateNotification resource, AppDbContext db)
+    public static async Task<IResult> AddNotification(CreateNotificationDto resource, AppDbContext db)
     {
+        var validator = new CreateNotificationValidator();
+        var validationResult = await validator.ValidateAsync(resource);
+        if (!validationResult.IsValid)
+            return Results.BadRequest(validationResult.Errors.Select(e => e.ErrorMessage).ToList());
+
         var notification = Notification.Create(resource);
         await db.Notifications.AddAsync(notification);
         await db.SaveChangesAsync();
         return Results.Ok(notification);
     }
 
-    public static async Task<IResult> DeactivateNotification(NotificationRequest resource, AppDbContext db)
+    public static async Task<IResult> DeactivateNotification(DeactivateNotificationDto resource, AppDbContext db)
     {
         var notification = await db.Notifications.FirstOrDefaultAsync(n => n.Id == resource.Id);
         if (notification == null) return Results.NotFound("Notification ID not found.");
-        if (!notification.Active) return Results.BadRequest("Notification is already inactive.");
-        if (DateTime.Now > notification.DisplayEnd) return Results.BadRequest("Notification has already expired.");
+
+        var validator = new DeactivateNotificationValidator();
+        var validationResult = await validator.ValidateAsync(notification);
+        if (!validationResult.IsValid)
+            return Results.BadRequest(validationResult.Errors.Select(e => e.ErrorMessage).ToList());
 
         notification.Deactivate();
         await db.SaveChangesAsync();
