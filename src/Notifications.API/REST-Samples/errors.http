@@ -1,0 +1,108 @@
+@HostAddress = https://localhost:7233
+@ApiKey = client-api-key-1
+@InvalidApiKey = invalid-api-key
+
+### (HTTP 401 Unauthorized) missing API key
+GET {{HostAddress}}/all
+Accept: application/json
+
+### (HTTP 401 Unauthorized) incorrect API key
+GET {{HostAddress}}/all
+Accept: application/json
+X-API-Key: {{InvalidApiKey}}
+
+### (HTTP 400 Bad Request) Invalid dates
+POST {{HostAddress}}/add
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+  "Message": "-",
+  "DisplayStart": "2020-05-01T09:00",
+  "DisplayEnd": "2020-08-01T21:00"
+}
+
+### (HTTP 400 Bad Request) Missing message field
+POST {{HostAddress}}/add
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+  "DisplayStart": "2025-06-25T09:00",
+  "DisplayEnd": "2050-08-01T21:00"
+}
+
+### (HTTP 400 Bad Request) Empty message field
+POST {{HostAddress}}/add
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+  "Message": "",
+  "DisplayStart": "2025-06-25T09:00",
+  "DisplayEnd": "2050-08-01T21:00"
+}
+
+### (HTTP 400 Bad Request) Empty message field and bad dates
+POST {{HostAddress}}/add
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+  "Message": "",
+  "DisplayStart": "2020-08-01T09:00",
+  "DisplayEnd": "2020-05-01T21:00"
+}
+
+### (HTTP 400 Bad Request) Missing ID when deactivating a notification.
+POST {{HostAddress}}/deactivate
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+}
+
+### (HTTP 400 Bad Request) Empty ID when deactivating a notification.
+POST {{HostAddress}}/deactivate
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+  "Id": ""
+}
+
+### (HTTP 400 Bad Request) Invalid ID when deactivating a notification.
+POST {{HostAddress}}/deactivate
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+  "Id": "abc"
+}
+
+### (HTTP 404 Not Found) Non-existent ID when deactivating a notification.
+POST {{HostAddress}}/deactivate
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+  "Id": "00000000-9999-0000-0000-000000000000"
+}
+
+### (HTTP 400 Bad Request) Attempt to deactivate an inactive notification.
+POST {{HostAddress}}/deactivate
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+  "Id": "00000000-0000-0000-0000-000000000002"
+}
+
+### (HTTP 400 Bad Request) Attempt to deactivate an expired notification.
+POST {{HostAddress}}/deactivate
+Content-Type: application/json
+X-API-Key: {{ApiKey}}
+
+{
+  "Id": "00000000-0000-0000-0000-000000000003"
+}

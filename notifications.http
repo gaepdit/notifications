@@ -1,9 +1,0 @@
-@HostAddress = https://localhost:7233
-
-### Check health.
-GET {{HostAddress}}/health
-Accept: application/json
-
-### Get all currently active notifications.
-GET {{HostAddress}}/current
-Accept: application/json

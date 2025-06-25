@@ -541,8 +541,11 @@ FodyWeavers.xsd
 # Environment settings files
 appsettings.*.json
 
-# SonarLint Rider plugin
-# .idea/**/sonarlint-state.xml
+## Build artifacts
+.artifacts/
 
-# Rider https request artifacts
-.idea/**/httpRequests
+# Sqlite database and associated files
+*.db*
+
+# Generated EF migration bundles
+efbundle.exe
