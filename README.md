@@ -2,6 +2,11 @@
 
 This application provides an ultra-simple API for publishing notifications to be displayed on various web applications.
 
+[![Georgia EPD-IT](https://raw.githubusercontent.com/gaepdit/gaepd-brand/main/blinkies/blinkies.cafe-gaepdit.gif)](https://github.com/gaepdit)
+[![.NET Test](https://github.com/gaepdit/notifications/actions/workflows/dotnet-test.yml/badge.svg)](https://github.com/gaepdit/notifications/actions/workflows/dotnet-test.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=gaepdit_notifications&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=gaepdit_notifications)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=gaepdit_notifications&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=gaepdit_notifications)
+
 ## Notifications
 
 A notification has the following properties:

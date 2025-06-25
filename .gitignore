@@ -544,12 +544,6 @@ appsettings.*.json
 ## Build artifacts
 .artifacts/
 
-# SonarLint Rider plugin
-# .idea/**/sonarlint-state.xml
-
-# Rider https request artifacts
-.idea/**/httpRequests
-
 # Sqlite database and associated files
 *.db*
 

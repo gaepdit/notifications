@@ -13,7 +13,7 @@ Accept: application/json
 GET {{HostAddress}}/current
 Accept: application/json
 
-### List all future active notifications.
+### List all future scheduled notifications.
 GET {{HostAddress}}/future
 Accept: application/json
 
