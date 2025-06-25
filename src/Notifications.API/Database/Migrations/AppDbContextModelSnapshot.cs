@@ -7,7 +7,7 @@ using Notifications.Database;
 
 #nullable disable
 
-namespace Notifications.Migrations
+namespace Notifications.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -34,6 +34,7 @@ namespace Notifications.Migrations
 
                     b.Property<string>("Message")
                         .IsRequired()
+                        .HasMaxLength(4000)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

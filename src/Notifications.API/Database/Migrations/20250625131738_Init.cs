@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Notifications.Migrations
+namespace Notifications.Database.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration
@@ -16,7 +16,7 @@ namespace Notifications.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Message = table.Column<string>(type: "TEXT", nullable: false),
+                    Message = table.Column<string>(type: "TEXT", maxLength: 4000, nullable: false),
                     DisplayStart = table.Column<DateTime>(type: "TEXT", nullable: false),
                     DisplayEnd = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Active = table.Column<bool>(type: "INTEGER", nullable: false)
