@@ -4,11 +4,22 @@ namespace Notifications.Database;
 
 internal static class TestData
 {
-    public static async Task SeedDataAsync(AppDbContext context, CancellationToken token)
+    public static async Task BuildDatabaseInDevAsync(this WebApplication app)
+    {
+        if (!app.Environment.IsDevelopment()) return;
+
+        using var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        await context.Database.EnsureDeletedAsync();
+        await context.Database.EnsureCreatedAsync();
+        await SeedDataAsync(context);
+    }
+
+    public static async Task SeedDataAsync(AppDbContext context)
     {
         if (context.Notifications.Any()) return;
         context.Notifications.AddRange(NotificationSeedItems);
-        await context.SaveChangesAsync(token);
+        await context.SaveChangesAsync();
     }
 
     private static Guid CurrentNotificationId { get; } = new("00000000-0000-0000-0000-000000000001");

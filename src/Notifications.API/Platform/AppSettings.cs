@@ -1,4 +1,4 @@
-﻿namespace Notifications.Settings;
+﻿namespace Notifications.Platform;
 
 internal static class AppSettings
 {

@@ -15,7 +15,7 @@ public class DeactivateNotificationTests
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseInMemoryDatabase(databaseName: "RepositoryTest")
-            .UseAsyncSeeding((context, _, token) => TestData.SeedDataAsync((AppDbContext)context, token))
+            .UseAsyncSeeding((context, _, _) => TestData.SeedDataAsync((AppDbContext)context))
             .Options;
 
         _dbContext = new AppDbContext(options);

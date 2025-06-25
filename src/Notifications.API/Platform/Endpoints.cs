@@ -1,7 +1,6 @@
 using Notifications.Database;
-using Notifications.Settings;
 
-namespace Notifications.Endpoints;
+namespace Notifications.Platform;
 
 internal static class Endpoints
 {

@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
-using Notifications.Settings;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 
-namespace Notifications.AuthHandlers;
+namespace Notifications.Platform;
 
 internal static class AuthenticationHandlerExtensions
 {

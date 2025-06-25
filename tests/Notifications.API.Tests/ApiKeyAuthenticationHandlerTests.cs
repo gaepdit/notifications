@@ -2,8 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Notifications.AuthHandlers;
-using Notifications.Settings;
+using Notifications.Platform;
 using System.Diagnostics;
 using System.Security.Claims;
 using System.Text.Encodings.Web;

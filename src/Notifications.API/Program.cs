@@ -1,8 +1,6 @@
 using Mindscape.Raygun4Net.AspNetCore;
-using Notifications.AuthHandlers;
 using Notifications.Database;
-using Notifications.Endpoints;
-using Notifications.Settings;
+using Notifications.Platform;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRaygun(builder.Configuration);
@@ -13,6 +11,7 @@ builder.ConfigureDatabase();
 var app = builder.Build();
 app.UseRaygun();
 app.MapEndpoints();
-await app.BuildDatabaseInDevAsync();
+
+if (app.Environment.IsDevelopment()) await app.BuildDatabaseInDevAsync();
 
 await app.RunAsync();
