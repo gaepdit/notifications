@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-### Added
+### [2.0.0] - 2025-06-25
 
 - Notifications are now stored in a Sqlite database.
 - Admin API endpoints have been added to enable managing notifications remotely.
@@ -11,4 +11,5 @@
 
 Initial production release.
 
+[2.0.0]: https://github.com/gaepdit/notifications/releases/tag/v2.0.0
 [1.0.0]: https://github.com/gaepdit/notifications/releases/tag/v1.0.0
