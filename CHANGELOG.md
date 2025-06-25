@@ -1,8 +1,6 @@
 # Changelog
 
-## Unreleased
-
-### [2.0.0] - 2025-06-25
+## [2.0.0] - 2025-06-25
 
 - Notifications are now stored in a Sqlite database.
 - Admin API endpoints have been added to enable managing notifications remotely.
