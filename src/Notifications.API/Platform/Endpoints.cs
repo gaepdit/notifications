@@ -6,8 +6,11 @@ internal static class Endpoints
 {
     public static void MapEndpoints(this IEndpointRouteBuilder app)
     {
-        // Public endpoints
+        // Status endpoints
         app.MapGet("/health", () => Results.Ok("OK"));
+        app.MapGet("/version", () => Results.Ok(new { version = AppSettings.GetVersion() }));
+
+        // Public endpoints
         app.MapGet("/current", Repository.GetCurrentNotificationsAsync);
         app.MapGet("/future", Repository.GetFutureNotificationsAsync);
 

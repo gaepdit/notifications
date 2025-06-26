@@ -9,6 +9,10 @@
 GET {{HostAddress}}/health
 Accept: application/json
 
+### Show app version.
+GET {{HostAddress}}/version
+Accept: application/json
+
 ### List all currently active notifications.
 GET {{HostAddress}}/current
 Accept: application/json

@@ -26,6 +26,10 @@ The `DisplayStart`, `DisplayEnd`, and `Active` properties control when and if th
 
 Returns OK if the API is running.
 
+### GET `/version`
+
+Returns the application version.
+
 ### GET `/current`
 
 Returns all notifications that are currently active and should be displayed based on the current date and time.
