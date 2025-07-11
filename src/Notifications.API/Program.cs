@@ -3,7 +3,7 @@ using Notifications.Database;
 using Notifications.Platform;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddRaygun(builder.Configuration);
+builder.ConfigureRaygunLogging();
 builder.Services.BindAppSettings();
 builder.Services.AddApiKeyAuthentication();
 builder.ConfigureDatabase();
