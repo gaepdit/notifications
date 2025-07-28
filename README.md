@@ -12,6 +12,7 @@ This application provides an ultra-simple API for publishing notifications to be
 A notification has the following properties:
 
 ```
+(Guid) Id
 (string) Message
 (DateTime) DisplayStart
 (DateTime) DisplayEnd
