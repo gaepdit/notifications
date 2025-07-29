@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.0.1] - 2025-07-29
+
+- Some backend code was updated.
+
 ## [2.0.0] - 2025-06-25
 
 - Notifications are now stored in a Sqlite database.
@@ -9,5 +13,6 @@
 
 Initial production release.
 
+[2.0.1]: https://github.com/gaepdit/notifications/releases/tag/v2.0.1
 [2.0.0]: https://github.com/gaepdit/notifications/releases/tag/v2.0.0
 [1.0.0]: https://github.com/gaepdit/notifications/releases/tag/v1.0.0
