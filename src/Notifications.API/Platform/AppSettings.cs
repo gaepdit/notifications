@@ -4,12 +4,16 @@ namespace Notifications.Platform;
 
 internal static class AppSettings
 {
+    public static string? Version { get; private set; }
     public const string ApiKeys = nameof(ApiKeys);
 
-    public static void BindAppSettings(this IServiceCollection services) =>
+    public static void BindAppSettings(this IServiceCollection services)
+    {
+        Version = GetVersion();
         services.AddOptions<List<string>>(ApiKeys).BindConfiguration(configSectionPath: ApiKeys);
+    }
 
-    public static string GetVersion()
+    private static string GetVersion()
     {
         var entryAssembly = Assembly.GetEntryAssembly();
         var segments = (entryAssembly?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?

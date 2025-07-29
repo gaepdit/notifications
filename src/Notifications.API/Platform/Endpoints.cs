@@ -8,7 +8,7 @@ internal static class Endpoints
     {
         // Status endpoints
         app.MapGet("/health", () => Results.Ok("OK"));
-        app.MapGet("/version", () => Results.Ok(new { version = AppSettings.GetVersion() }));
+        app.MapGet("/version", () => Results.Ok(new { AppSettings.Version }));
 
         // Public endpoints
         app.MapGet("/current", Repository.GetCurrentNotificationsAsync);
