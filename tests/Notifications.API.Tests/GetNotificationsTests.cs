@@ -13,7 +13,7 @@ public class GetNotificationsTests
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseInMemoryDatabase(databaseName: "RepositoryTest")
-            .UseAsyncSeeding((context, _, _) => TestData.SeedDataAsync((AppDbContext)context))
+            .UseAsyncSeeding((context, _, _) => TestData.SeedDataAsync(context))
             .Options;
 
         _dbContext = new AppDbContext(options);
