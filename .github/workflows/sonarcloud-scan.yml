@@ -68,5 +68,5 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"gaepdit_notifications" /o:"gaepdit" /d:sonar.token="$env:SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=coverage.xml /d:sonar.exclusions=samples/**
           dotnet build
-          coverlet .\.artifacts\Notifications.API.Tests\bin\Debug\net9.0\Notifications.API.Tests.dll --target "dotnet" --targetargs "test tests/Notifications.API.Tests --no-build" -f=opencover -o="coverage.xml"
+          coverlet .\.artifacts\Notifications.API.Tests\bin\Debug\net10.0\Notifications.API.Tests.dll --target "dotnet" --targetargs "test tests/Notifications.API.Tests --no-build" -f=opencover -o="coverage.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"
