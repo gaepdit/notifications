@@ -1,17 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <LangVersion>latest</LangVersion>
+        <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
+        <EnableNUnitRunner>true</EnableNUnitRunner>
+        <OutputType>Exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AwesomeAssertions" Version="9.1.0"/>
-        <PackageReference Include="AwesomeAssertions.Analyzers" Version="9.0.3">
+        <PackageReference Include="AwesomeAssertions" Version="9.3.0" />
+        <PackageReference Include="AwesomeAssertions.Analyzers" Version="9.0.8">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
@@ -19,21 +20,21 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.9"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.2" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
         <PackageReference Include="NSubstitute" Version="5.3.0" />
         <PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.17">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="NUnit" Version="4.4.0"/>
-        <PackageReference Include="NUnit.Analyzers" Version="4.10.0">
+        <PackageReference Include="NUnit" Version="4.4.0" />
+        <PackageReference Include="NUnit.Analyzers" Version="4.11.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="NUnit3TestAdapter" Version="5.1.0"/>
-        <PackageReference Include="NunitXml.TestLogger" Version="6.1.0" />
-        <PackageReference Include="SonarAnalyzer.CSharp" Version="10.15.0.120848">
+        <PackageReference Include="NUnit3TestAdapter" Version="6.1.0" />
+        <PackageReference Include="NunitXml.TestLogger" Version="8.0.0" />
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="10.18.0.131500">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
