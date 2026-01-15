@@ -542,7 +542,7 @@ FodyWeavers.xsd
 appsettings.*.json
 
 ## Build artifacts
-.artifacts/
+_artifacts/
 
 # Sqlite database and associated files
 *.db*

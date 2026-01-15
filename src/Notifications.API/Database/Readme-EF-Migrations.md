@@ -6,4 +6,4 @@ Instructions for adding a new Entity Framework database migration and updating t
 
 2. Run the following command with an appropriate migration name:
 
-   `dotnet ef migrations add NAME_OF_MIGRATION --msbuildprojectextensionspath ..\..\.artifacts\Notifications.API\obj\`
+   `dotnet ef migrations add NAME_OF_MIGRATION`

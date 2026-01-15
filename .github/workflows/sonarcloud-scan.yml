@@ -4,10 +4,6 @@ on:
   pull_request:
     types: [ opened, synchronize, reopened ]
 
-permissions:
-  contents: read
-  issues: write
-
 jobs:
   sonarcloud-scan:
     # ↓ Change this to "false" to disable the workflow without any alert messages.
@@ -16,6 +12,10 @@ jobs:
 
     name: Analyze with SonarCloud
     runs-on: windows-latest
+    permissions:
+      contents: read
+      issues: write
+    
     steps:
       - name: Set up Java JDK
         uses: actions/setup-java@f2beeb24e141e01a676f977032f5a29d81c9e27e
@@ -68,5 +68,5 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"gaepdit_notifications" /o:"gaepdit" /d:sonar.token="$env:SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=coverage.xml /d:sonar.exclusions=samples/**
           dotnet build
-          coverlet .\.artifacts\Notifications.API.Tests\bin\Debug\net10.0\Notifications.API.Tests.dll --target "dotnet" --targetargs "test tests/Notifications.API.Tests --no-build" -f=opencover -o="coverage.xml"
+          coverlet .\_artifacts\bin\Notifications.API.Tests\debug\Notifications.API.Tests.dll --target "dotnet" --targetargs "test tests/Notifications.API.Tests --no-build" -f=opencover -o="coverage.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"
