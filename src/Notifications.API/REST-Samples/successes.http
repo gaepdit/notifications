@@ -5,6 +5,10 @@
 @ApiKey = client-api-key-1
 @ApiKey2 = client-api-key-2
 
+### Connect to API
+GET {{HostAddress}}
+Accept: application/json
+
 ### Check health.
 GET {{HostAddress}}/health
 Accept: application/json

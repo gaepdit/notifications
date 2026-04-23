@@ -22,10 +22,10 @@ public class AddNotificationTests
     }
 
     [TearDown]
-    public void TearDown()
+    public async Task TearDown()
     {
-        _dbContext.Database.EnsureDeleted();
-        _dbContext.Dispose();
+        await _dbContext.Database.EnsureDeletedAsync();
+        await _dbContext.DisposeAsync();
     }
 
     [Test]

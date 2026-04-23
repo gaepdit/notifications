@@ -6,19 +6,23 @@ namespace Notifications.Database;
 internal static class Repository
 {
     // Read
+    public static async Task<IResult> DbAvailable(AppDbContext db) =>
+        await db.Database.CanConnectAsync()
+            ? TypedResults.Ok("OK")
+            : TypedResults.InternalServerError("Database not available.");
 
-    public static Task<List<Notification>> GetCurrentNotificationsAsync(AppDbContext db) =>
-        db.Notifications
+    public static async Task<List<Notification>> GetCurrentNotificationsAsync(AppDbContext db) =>
+        await db.Notifications
             .Where(n => n.Active && n.DisplayStart < DateTime.Now && DateTime.Now < n.DisplayEnd)
             .OrderBy(n => n.DisplayStart).ThenBy(n => n.DisplayEnd).ToListAsync();
 
-    public static Task<List<Notification>> GetFutureNotificationsAsync(AppDbContext db) =>
-        db.Notifications
+    public static async Task<List<Notification>> GetFutureNotificationsAsync(AppDbContext db) =>
+        await db.Notifications
             .Where(n => n.Active && DateTime.Now < n.DisplayStart)
             .OrderBy(n => n.DisplayStart).ThenBy(n => n.DisplayEnd).ToListAsync();
 
-    public static Task<List<Notification>> GetAllNotifications(AppDbContext db) =>
-        db.Notifications
+    public static async Task<List<Notification>> GetAllNotifications(AppDbContext db) =>
+        await db.Notifications
             .OrderBy(n => n.DisplayStart).ThenBy(n => n.DisplayEnd).ToListAsync();
 
     // Write
