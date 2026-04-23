@@ -7,7 +7,8 @@ internal static class Endpoints
     public static void MapEndpoints(this IEndpointRouteBuilder app)
     {
         // Status endpoints
-        app.MapGet("/health", () => Results.Ok("OK"));
+        app.MapGet("/", () => Results.Ok());
+        app.MapGet("/health", Repository.DbAvailable);
         app.MapGet("/version", () => Results.Ok(new { AppSettings.Version }));
 
         // Public endpoints

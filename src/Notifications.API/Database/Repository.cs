@@ -6,6 +6,10 @@ namespace Notifications.Database;
 internal static class Repository
 {
     // Read
+    public static async Task<IResult> DbAvailable(AppDbContext db) =>
+        await db.Database.CanConnectAsync()
+            ? TypedResults.Ok("OK")
+            : TypedResults.InternalServerError("Database not available.");
 
     public static async Task<List<Notification>> GetCurrentNotificationsAsync(AppDbContext db) =>
         await db.Notifications

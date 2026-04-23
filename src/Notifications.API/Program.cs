@@ -19,6 +19,6 @@ builder.ConfigureDatabase();
 var app = builder.Build();
 app.UseRaygun();
 app.MapEndpoints();
-await app.BuildDatabaseAsync();
 
+await app.BuildDatabaseAsync();
 await app.RunAsync();
