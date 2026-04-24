@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <InformationalVersion>2026.1.15</InformationalVersion>
+        <InformationalVersion>2026.4.24</InformationalVersion>
         <RootNamespace>Notifications</RootNamespace>
     </PropertyGroup>
 
@@ -40,11 +40,6 @@
             <ObjectName>filePath</ObjectName>
             <AbsolutePath>web.config</AbsolutePath>
         </MsDeploySkipRules>
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Include="../../README.md" />
-        <None Include="../../CHANGELOG.md" />
     </ItemGroup>
 
 </Project>

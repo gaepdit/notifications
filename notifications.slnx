@@ -4,6 +4,10 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Folder Name="/Solution files/">
+    <File Path="CHANGELOG.md" />
+    <File Path="README.md" />
+  </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Notifications.API.Tests/Notifications.API.Tests.csproj" />
   </Folder>
