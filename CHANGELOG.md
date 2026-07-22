@@ -1,5 +1,9 @@
 # Changelog
 
+## [2026.7.22] - 2026-07-22
+
+- Update NuGet packages.
+
 ## [2026.4.24] - 2026-04-24
 
 - Added a DB connection check to the `/health` endpoint and added a response at the root `/` endpoint.
@@ -26,3 +30,4 @@ Initial production release.
 [2.0.1]: https://github.com/gaepdit/notifications/releases/tag/v2.0.1
 [2026.1.15]: https://github.com/gaepdit/notifications/releases/tag/v2026.1.15
 [2026.4.24]: https://github.com/gaepdit/notifications/releases/tag/v2026.4.24
+[2026.7.22]: https://github.com/gaepdit/notifications/releases/tag/v2026.7.22
