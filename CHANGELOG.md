@@ -1,5 +1,9 @@
 # Changelog
 
+## [2026.10.20] - 2026-10-20
+
+- Update dependencies.
+
 ## [2026.7.22] - 2026-07-22
 
 - Update NuGet packages.
@@ -31,3 +35,4 @@ Initial production release.
 [2026.1.15]: https://github.com/gaepdit/notifications/releases/tag/v2026.1.15
 [2026.4.24]: https://github.com/gaepdit/notifications/releases/tag/v2026.4.24
 [2026.7.22]: https://github.com/gaepdit/notifications/releases/tag/v2026.7.22
+[2026.10.20]: https://github.com/gaepdit/notifications/releases/tag/v2026.10.20

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <InformationalVersion>2026.7.22</InformationalVersion>
+        <InformationalVersion>2026.10.20</InformationalVersion>
         <RootNamespace>Notifications</RootNamespace>
     </PropertyGroup>
 
